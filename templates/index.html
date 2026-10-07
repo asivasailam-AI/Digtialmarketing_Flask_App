@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Marketing Conversion Prediction</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e7244, #1b3b28);
+            min-height: 200vh;
+            display: flex;
+            justify-content: center;
+            align-items: top;
+            padding: 30px;
+        }
+
+        .container {
+            background: #fff;
+            width: 100%;
+            max-width: 750px;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            color: #1e3c72;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-group input {
+            padding: 12px 15px;
+            border: 2px solid #d9d9d9;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #2a5298;
+            box-shadow: 0 0 8px rgba(42, 82, 152, 0.3);
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .predict-btn {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 17px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .predict-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .25);
+        }
+
+        .footer {
+            margin-top: 25px;
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+        }
+
+        @media(max-width:650px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: span 1;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>🩺 Digital Marketing Conversion Prediction System</h1>
+            <p>Enter the customer's metrics values to predict conversion likelihood.</p>
+        </div>
+
+        <form action="/predict" method="POST">
+
+            <div class="input-group">
+                <label>TimeOnSite</label>
+                <input type="number" step="any" name="TimeOnSite" placeholder="e.g. 148" required>
+            </div>
+
+            <div class="input-group">
+                <label>AdSpend</label>
+                <input type="number" step="any" name="AdSpend" placeholder="e.g. 36" required>
+            </div>
+
+            <div class="input-group">
+                <label>ClickThroughRate</label>
+                <input type="number" step="any" name="ClickThroughRate" placeholder="e.g. 1.2" required>
+            </div>
+
+            <div class="input-group">
+                <label>EmailClicks</label>
+                <input type="number" step="any" name="EmailClicks" placeholder="e.g. 44" required>
+            </div>
+
+            <div class="input-group">
+                <label>EmailOpens</label>
+                <input type="number" step="any" name="EmailOpens" placeholder="e.g. 7" required>
+            </div>
+
+            <div class="input-group">
+                <label>PagesPerVisit</label>
+                <input type="number" step="any" name="PagesPerVisit" placeholder="e.g. 70" required>
+            </div>
+
+            <div class="input-group">
+                <label>PreviousPurchases</label>
+                <input type="number" step="any" name="PreviousPurchases" placeholder="e.g. 7" required>
+            </div>
+
+            <div class="full-width">
+                <button class="predict-btn" type="submit">
+                    Predict Conversion
+                </button>
+            </div>
+
+        </form>
+
+        <div class="footer">
+            AI Powered Digital Marketing Conversion Prediction System
+        </div>
+
+    </div>
+
+</body>
+
+</html>
