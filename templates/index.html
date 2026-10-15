@@ -4,12 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Marketing Conversion Prediction</title>
+    <title>Share Price Forecast</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <style>
+        :root {
+            color-scheme: light;
+            --ink: #142a24;
+            --muted: #677872;
+            --green: #16845b;
+            --green-dark: #106b49;
+            --line: #dce7e1;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,109 +27,215 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1e7244, #1b3b28);
-            min-height: 200vh;
+            background:
+                radial-gradient(ellipse at 15% 10%, rgba(45, 161, 112, .18), transparent 38%),
+                linear-gradient(135deg, #f1f7f3, #e7f0eb);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: top;
-            padding: 30px;
+            align-items: center;
+            padding: 48px 20px;
         }
 
         .container {
-            background: #fff;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, .96);
             width: 100%;
-            max-width: 750px;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            max-width: 790px;
+            border: 1px solid rgba(220, 231, 225, .9);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 24px 70px rgba(24, 63, 45, .12);
+        }
+
+        .container::before {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #16845b, #54bd85);
+            content: "";
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 34px;
+            text-align: left;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            color: var(--green-dark);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #37a875;
+            box-shadow: 0 0 0 4px #e5f5ec;
+            content: "";
         }
 
         .header h1 {
-            color: #1e3c72;
-            font-size: 32px;
-            margin-bottom: 10px;
+            max-width: 620px;
+            color: var(--ink);
+            font-size: clamp(27px, 4vw, 36px);
+            font-weight: 600;
+            letter-spacing: -.04em;
+            line-height: 1.2;
+            margin-bottom: 12px;
         }
 
         .header p {
-            color: #666;
+            color: var(--muted);
             font-size: 15px;
+            line-height: 1.7;
         }
 
         form {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 22px 18px;
         }
 
         .input-group {
             display: flex;
             flex-direction: column;
+            gap: 8px;
         }
 
         .input-group label {
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #333;
+            color: #344840;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         .input-group input {
-            padding: 12px 15px;
-            border: 2px solid #d9d9d9;
-            border-radius: 10px;
-            font-size: 15px;
-            transition: 0.3s;
+            width: 100%;
+            min-height: 54px;
+            padding: 13px 15px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            outline: none;
+            background: #fbfdfb;
+            color: var(--ink);
+            font-size: 14px;
+            transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+        }
+
+        .input-group input::placeholder {
+            color: #9aa9a1;
         }
 
         .input-group input:focus {
-            outline: none;
-            border-color: #2a5298;
-            box-shadow: 0 0 8px rgba(42, 82, 152, 0.3);
+            border-color: #50a87b;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(42, 151, 94, .12);
+        }
+
+        .input-hint {
+            color: #87968f;
+            font-size: 11px;
+            line-height: 1.5;
         }
 
         .full-width {
-            grid-column: span 2;
+            grid-column: 1 / -1;
+            margin-top: 4px;
         }
 
         .predict-btn {
-            background: linear-gradient(to right, #1e3c72, #2a5298);
-            color: white;
+            display: flex;
+            width: 100%;
+            min-height: 56px;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             border: none;
-            padding: 15px;
-            font-size: 17px;
+            border-radius: 12px;
+            background: linear-gradient(110deg, var(--green-dark), #21966a);
+            box-shadow: 0 9px 20px rgba(22, 132, 91, .18);
+            color: #fff;
+            font-size: 15px;
             font-weight: 600;
-            border-radius: 10px;
             cursor: pointer;
-            transition: .3s;
+            transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+        }
+
+        .predict-btn::after {
+            content: "→";
+            font-size: 19px;
+            line-height: 1;
+            transition: transform .2s ease;
         }
 
         .predict-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, .25);
+            box-shadow: 0 13px 24px rgba(22, 132, 91, .25);
+            filter: saturate(1.08);
+        }
+
+        .predict-btn:hover::after {
+            transform: translateX(3px);
+        }
+
+        .predict-btn:focus-visible {
+            outline: 3px solid rgba(22, 132, 91, .35);
+            outline-offset: 3px;
         }
 
         .footer {
-            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
             text-align: center;
-            color: #888;
-            font-size: 13px;
+            color: #899890;
+            font-size: 12px;
         }
 
-        @media(max-width:650px) {
+        .footer::before {
+            content: "✦";
+            color: #36a875;
+        }
+
+        @media (max-width: 650px) {
+            body {
+                align-items: flex-start;
+                padding: 24px 14px;
+            }
+
+            .container {
+                padding: 34px 24px;
+                border-radius: 20px;
+            }
+
             form {
                 grid-template-columns: 1fr;
+                gap: 18px;
             }
 
             .full-width {
-                grid-column: span 1;
+                grid-column: 1;
             }
+        }
 
-            .header h1 {
-                font-size: 26px;
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
             }
         }
     </style>
@@ -132,57 +247,49 @@
     <div class="container">
 
         <div class="header">
-            <h1>🩺 Digital Marketing Conversion Prediction System</h1>
-            <p>Enter the customer's metrics values to predict conversion likelihood.</p>
+            <span class="eyebrow">Market insights</span>
+            <h1>Share Price Forecasting using Time Series Analysis</h1>
+            <p>Choose a listed company and historical date range to generate a multi-day price forecast.</p>
         </div>
 
         <form action="/predict" method="POST">
 
             <div class="input-group">
-                <label>TimeOnSite</label>
-                <input type="number" step="any" name="TimeOnSite" placeholder="e.g. 148" required>
+                <label for="symbol">Company symbol</label>
+                <input id="symbol" type="text" name="symbol" placeholder="e.g. ITCHOTELS"
+                    autocomplete="off" autocapitalize="characters" required>
+                <span class="input-hint">Enter the NSE symbol for the company.</span>
             </div>
 
             <div class="input-group">
-                <label>AdSpend</label>
-                <input type="number" step="any" name="AdSpend" placeholder="e.g. 36" required>
+                <label for="start_date">Start date</label>
+                <input id="start_date" type="date" name="start_date" required>
+                <span class="input-hint">First date to include in the historical data.</span>
             </div>
 
             <div class="input-group">
-                <label>ClickThroughRate</label>
-                <input type="number" step="any" name="ClickThroughRate" placeholder="e.g. 1.2" required>
+                <label for="end_date">End date</label>
+                <input id="end_date" type="date" name="end_date" required>
+                <span class="input-hint">Last date to include in the historical data.</span>
             </div>
 
             <div class="input-group">
-                <label>EmailClicks</label>
-                <input type="number" step="any" name="EmailClicks" placeholder="e.g. 44" required>
-            </div>
-
-            <div class="input-group">
-                <label>EmailOpens</label>
-                <input type="number" step="any" name="EmailOpens" placeholder="e.g. 7" required>
-            </div>
-
-            <div class="input-group">
-                <label>PagesPerVisit</label>
-                <input type="number" step="any" name="PagesPerVisit" placeholder="e.g. 70" required>
-            </div>
-
-            <div class="input-group">
-                <label>PreviousPurchases</label>
-                <input type="number" step="any" name="PreviousPurchases" placeholder="e.g. 7" required>
+                <label for="days_to_predict">Days to forecast</label>
+                <input id="days_to_predict" type="number" name="days_to_predict" min="1" step="1"
+                    placeholder="e.g. 5" required>
+                <span class="input-hint">Number of future trading days to predict.</span>
             </div>
 
             <div class="full-width">
                 <button class="predict-btn" type="submit">
-                    Predict Conversion
+                    Forecast Share Price
                 </button>
             </div>
 
         </form>
 
         <div class="footer">
-            AI Powered Digital Marketing Conversion Prediction System
+            Share price forecasting
         </div>
 
     </div>
